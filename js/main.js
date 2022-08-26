@@ -1,7 +1,6 @@
 $(function () {
 
   let menu = $('.menu');
-  let header = $('.header');
   /*let headerHeight = header.height(); 
   //Якщо потрібно, щоб після хедера шапка була лепкою*/
   let menuHeight = menu.height();
@@ -32,17 +31,25 @@ $(function () {
     dots: true
   });
 
-  $('.burger, .menu a').on('click', function () {
-    $('.menu__list').toggleClass('menu__list--active');
-    $('.burger').toggleClass('burger--active');
-
+  function bodyVisible() {
     if ($('.menu__list').hasClass('menu__list--active')) {
       $('body').css('overflow', 'hidden');
     } else {
       $('body').css('overflow', 'visible');
     }
+  }
 
+  $('.burger').on('click', function () {
+    $('.menu__list').toggleClass('menu__list--active');
+    $('.burger').toggleClass('burger--active');
+    bodyVisible();
   });
+
+  $('.menu a').on('click', function () {
+    $('.menu__list').removeClass('menu__list--active');
+    $('.burger').removeClass('burger--active');
+    bodyVisible();
+  })
 
 });
 
